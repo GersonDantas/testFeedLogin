@@ -8,7 +8,7 @@ const Main = styled.main`
     width: inherit;
     height: inherit;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
     background: url('/backgrounds/waveTwo.svg') no-repeat ,url('/backgrounds/waveOne.svg') #093545 no-repeat;
     background-position: bottom;
     background-size: contain;

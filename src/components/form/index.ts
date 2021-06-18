@@ -6,6 +6,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   .button {
     background-color: #20df7f;
     width: 300px;

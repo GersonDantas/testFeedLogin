@@ -14,7 +14,7 @@ const PostFeed: React.FC<Props> = () => {
         <Avatar className="avatarPost"></Avatar>
       </div>
       <div className="divForm">
-        <Form>
+        <Form className="form">
           <textarea
             className="textArea"
             placeholder="text write from your post..."

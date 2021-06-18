@@ -34,41 +34,43 @@ const Post = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    .textArea {
-      min-width: 500px;
-      min-height: 145px;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 1.05em;
-      line-height: 1.05em;
-      color: #ffffff;
-      padding-left: 10px;
-      border-radius: 10px;
-      background-color: #224957;
-      border-color: transparent;
-      margin-bottom: 8px;
-      ::placeholder {
-
+    .form {
+      height: auto;
+      .textArea {
+        min-width: 500px;
+        min-height: 145px;
         font-style: normal;
         font-weight: normal;
         font-size: 1.05em;
         line-height: 1.05em;
         color: #ffffff;
-      }
-    }
-    .divButPost {
-      display: flex;
-      justify-content: flex-end;
-      width: 500px;
-      .buttonPost {
-        position: static;
-        background-color: #20df7f;
-        width: 150px;
-        height: 45px;
-        color: #fff;
+        padding-left: 10px;
         border-radius: 10px;
-        :hover {
-          background-color: #78e08094;
+        background-color: #224957;
+        border-color: transparent;
+        margin-bottom: 8px;
+        ::placeholder {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 1.05em;
+          line-height: 1.05em;
+          color: #ffffff;
+        }
+      }
+      .divButPost {
+        display: flex;
+        justify-content: flex-end;
+        width: 500px;
+        .buttonPost {
+          position: static;
+          background-color: #20df7f;
+          width: 150px;
+          height: 45px;
+          color: #fff;
+          border-radius: 10px;
+          :hover {
+            background-color: #78e08094;
+          }
         }
       }
     }

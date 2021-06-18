@@ -15,7 +15,7 @@ const Header: React.FC<Props> = ({ name }) => {
         <Avatar className="avatarHeader">{name}</Avatar>
       </div>
       <div>
-        <Button href="#logout">
+        <Button href="/auth">
           <ExitToApp style={{ color: "#fff" }} />
         </Button>
       </div>

@@ -12,7 +12,9 @@
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.1",
     "next": "11.0.0",
+    "next-auth": "^3.27.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.8.8",
@@ -20,6 +22,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^2.5.2",
     "@types/react": "17.0.11",
     "@types/styled-components": "^5.1.10",
     "babel-plugin-styled-components": "^1.12.0",
