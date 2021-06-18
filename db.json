@@ -1,0 +1,30 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "test1",
+            "password": "49716685"
+        },
+        {
+            "id": 2,
+            "username": "test2",
+            "password": "34914443"
+        },
+        {
+            "id": 3,
+            "username": "test3",
+            "password": "59688897"
+        }
+    ],
+    "messages": [
+        {
+            "message": "texto da mensagem"
+        },
+        {
+            "message": "texto da mensagem"
+        },
+        {
+            "message": "texto da mensagem"
+        }
+    ]
+}
