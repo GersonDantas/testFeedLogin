@@ -7,6 +7,9 @@ import Input from "../../components/field/input";
 import Button from "@material-ui/core/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Login, storeToken } from "../../services/authentication";
+import { Context } from "../../utils/Context/Contex";
+import IsLoading from "../../components/isLoading";
+
 
 interface IFormInput {
   username: string;
@@ -14,6 +17,8 @@ interface IFormInput {
 }
 
 const Auth: React.FC = () => {
+  const {isLoading, setIsloading, loadingVisibleSuport} = useContext(Context)
+
   const [error, setErro] = useState();
 
   const router = useRouter();
@@ -26,13 +31,13 @@ const Auth: React.FC = () => {
         await storeToken(user.authToken);
       }
 
-      setErro("loading...") //resposta de carregamento pra o usuário 
       reset()
       router.push("/feed");
-
+      
     } catch (error) {
       if (error.message.includes("401")) {
         setErro("username or password not found") //resposta de error pra o usuário 
+        setIsloading(!isLoading)
       }
     }
   };
@@ -58,10 +63,11 @@ const Auth: React.FC = () => {
         <Error >
           <span className={error === "loading..." ? "loading" : "error"}>{error}</span>
         </Error>
-        <Button type="submit" className="button" variant="contained">
+        <Button type="submit" className="button" variant="contained" onClick={loadingVisibleSuport}>
           Login
         </Button>
       </Form>
+     {isLoading && <IsLoading />}
     </Main>
   );
 };
