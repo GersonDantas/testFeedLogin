@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Span = styled.span`
+const Span = styled.p`
   color: #fff;
   margin-bottom: 36px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -27,4 +27,17 @@ const H1 = styled.h1`
   color: #fff;
 `;
 
-export { Span, H1 };
+const Error = styled.div`
+  height: 50px;
+  span.error {
+    height: 50px;
+    font-size: 20px;
+    color: red;
+  }
+  span.loading {
+    margin-bottom: 30px;
+    color: green;
+  }
+`;
+
+export { Span, H1, Error };

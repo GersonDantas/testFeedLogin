@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
+import React, { useState, useContext } from "react";
+import { useRouter } from "next/router";
 import Main from "../../components/container";
 import Form from "../../components/form";
-import { Span, H1 } from "./styles";
-// import Field from "../../components/field";
+import { Span, H1, Error} from "./styles";
 import Input from "../../components/field/input";
 import Button from "@material-ui/core/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
-import api from '../api/api'
+import { Login, storeToken } from "../../services/authentication";
 
 interface IFormInput {
   username: string;
@@ -15,30 +14,27 @@ interface IFormInput {
 }
 
 const Auth: React.FC = () => {
-  const [error, setErro] = useState<string>()
-  const [value, setValue] = useState<string>()
-  
+  const [error, setErro] = useState();
+
   const router = useRouter();
 
-  const handleValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const val = event.target.value
-    setValue(val)
-  }
+  const { register, handleSubmit, reset } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => { //a resposta do submit vem no data
+    try {
+      const user = await Login(data);
+      if (typeof window !== "undefined") {
+        await storeToken(user.authToken);
+      }
 
-  const { register, handleSubmit} = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    await api.post('/auth',{
-      "username": data.username,
-      "password": data.password
-    }).then(resp => {
-      router.push('/feed')
-      console.log(resp.data)
-    })
-    .catch(err => {
-      setErro(err.message)
-    })
+      setErro("loading...") //resposta de carregamento pra o usuário 
+      reset()
+      router.push("/feed");
 
-    console.log(data.username);
+    } catch (error) {
+      if (error.message.includes("401")) {
+        setErro("username or password not found") //resposta de error pra o usuário 
+      }
+    }
   };
   return (
     <Main>
@@ -48,18 +44,20 @@ const Auth: React.FC = () => {
         <Input
           placeholder="Username"
           type="autocomplete"
-          {...register("username",{
-            required: true
+          {...register("username", {
+            required: true,
           })}
         />
         <Input
           placeholder="password"
           type="password"
-          {...register("password",{
-            required: true
+          {...register("password", {
+            required: true,
           })}
         />
-        <p className="erro">{error}</p>
+        <Error >
+          <span className={error === "loading..." ? "loading" : "error"}>{error}</span>
+        </Error>
         <Button type="submit" className="button" variant="contained">
           Login
         </Button>

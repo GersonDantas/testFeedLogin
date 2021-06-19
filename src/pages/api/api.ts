@@ -1,10 +1,18 @@
-import axios from 'axios'
+import axios from "axios";
+import { getToken } from "../../services/authentication";
 
 const api = axios.create({
-    baseURL: "https://job.ensemble.com.br/api/",
-    headers: {
-        "ens-api-token": "cd0WQOEH7C3jAMUEXkCS"
-    }
-})
+  baseURL: "https://job.ensemble.com.br/api",
+  headers: {
+    "ens-api-token": "cd0WQOEH7C3jAMUEXkCS",
+  },
+});
 
-export default api
+// if (typeof window !== "undefined") {
+//   const authToken = window.localStorage.getItem("authToken");
+//   if (authToken) {
+//     api.defaults.headers.common["ens-auth-token"] = authToken
+//   }
+// }
+
+export default api;
