@@ -22,9 +22,6 @@ const Feed: React.FC = () => {
     }
   }, []);
 
-
-console.log(SeeFeed())
-
   return (
     <>
       <Header name="G" />
