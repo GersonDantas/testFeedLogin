@@ -9,6 +9,7 @@ import { SubmitHandler, useForm} from "react-hook-form";
 import { Login, storeToken } from "@services/authentication";
 import { Context } from "@utils/Context/Contex";
 import IsLoading from "@components/isLoading";
+import { setAutorization } from "@services/authorization";
 
 interface IFormInput {
   username: string;
@@ -16,7 +17,7 @@ interface IFormInput {
 }
 
 const Auth: React.FC = () => {
-  const [error, setErro] = useState("");
+  const [err, setErr] = useState("");
 
   const { isLoading, setIsloading, setIUserInput, iUserInput} =
     useContext(Context);
@@ -33,17 +34,19 @@ const Auth: React.FC = () => {
         await storeToken(user.authToken);
       }
 
-      await setIUserInput({ //salvando o usuário e senha, para trocar token depois de 59 minutos
+      await setIUserInput({ //salvando o usuário e senha
         username: data.username, 
         password: data.password 
-      }); 
+      });
+
+      setAutorization(data.username , data.password)
 
       reset();
       router.push("/feed");
     } catch (error) {
+      setIsloading(false);
       if (error.message.includes("401")) {
-        setErro("username or password not found"); //resposta de error pra o usuário
-        setIsloading(false);
+        setErr("username or password not found"); //resposta de error pra o usuário
       }
     }
   };
@@ -68,13 +71,13 @@ const Auth: React.FC = () => {
           })}
         />
         <Error>
-          {error && <span className="error">{error}</span>}
+          {err && <span className="error">{err}</span>}
         </Error>
         <Button
           type="submit"
           className="button"
           variant="contained"
-          onClick={() => setTimeout(() => setErro(""), 2000)}
+          onClick={() => setTimeout(() => setErr(""), 2500)}
         >
           Login
         </Button>

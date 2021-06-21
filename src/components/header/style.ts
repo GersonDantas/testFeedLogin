@@ -13,8 +13,8 @@ const Nav = styled.header`
   padding: 0 10px 0 10px;
   .avatarHeader {
     color: #fff;
-    background-color: #20DF7F;
+    background-color: #20df7f;
   }
 `;
 
-export default Nav
+export default Nav;

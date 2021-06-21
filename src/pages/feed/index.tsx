@@ -1,17 +1,23 @@
-import Link from "next/link";
-import React, { useContext, useEffect, useState, useRef } from "react";
+/* eslint-disable react/jsx-key */
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Main from "@components/container";
-import Header from "@components/header";
 import PostFeed from "@components/postFeed";
 import Message from "@components/message";
-import { getToken, SeeFeed } from "@services/authorization";
+import {
+  getAuthorization,
+  getToken,
+  infoFeed,
+  returnFeed,
+} from "@services/authorization";
 import IsLoading from "@components/isLoading";
 import { Context } from "@utils/Context/Contex";
-import api from "@services/api/api";
+import { Login, storeToken } from "@services/authentication";
 
 const Feed: React.FC = () => {
-  const { isLoading, setIsloading, iUserInput } = useContext(Context);
+  const { isLoading, setIsloading, postsState, setPosts } = useContext(Context);
+  const [recharge, setRecharge] = useState<boolean>();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -19,35 +25,48 @@ const Feed: React.FC = () => {
       if (typeof window !== "undefined" && !getToken()) {
         await router.push("/login"); //authorization
       }
-      setIsloading(false)
+      setIsloading(false);
+      const seq = await infoFeed();
 
-      const data = await api
-      .get("/feed", {
-        headers: {
-          "ens-auth-token": getToken()
-        },
-      })
-      .then((res) => res.data)
-      .catch(e => alert("server error"))
+      const data = await returnFeed(seq.lastPostSeq, 100, "desc");
+      let d = await data.posts;
+      setPosts(d);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postsState, recharge]);
 
-      
-    })()
+  useEffect(() => {
+    const clear = setInterval(() => {
+      let r = !recharge;
+      setRecharge(r);
+      console.log(recharge);
+    }, 5000); //update das mensagens
+    return () => clearInterval(clear);
+  }, []);
+
+  useEffect(() => {
+    const clear2 = setInterval(async () => {
+      const d = await Login(JSON.parse(getAuthorization()));
+      await storeToken(d.authToken)
+      console.log(d);
+    }, 5000); //vai realtenticar usuário após 59 minutos
+
+    return () => clearInterval(clear2);
   }, []);
 
   return (
-      <Main>
-        <PostFeed />
-        {/* {text.map((text) => (
-          // eslint-disable-next-line react/jsx-key
-          <Message
-            count={text.count}
-            name={iUserInput.username}
-            message={text.message}
-            date={text.lastPostDate}
-          />
-        ))} */}
-        {isLoading && <IsLoading />}
-      </Main>
+    <Main>
+      <PostFeed />
+      {postsState.map((text) => (
+        <Message
+          count={text.count}
+          name={text.user}
+          message={text.message}
+          date={text.date}
+        />
+      ))}
+      {isLoading && <IsLoading />}
+    </Main>
   );
 };
 

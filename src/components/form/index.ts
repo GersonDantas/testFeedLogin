@@ -14,7 +14,7 @@ const Form = styled.form`
     color: #fff;
     border-radius: 10px;
     :hover {
-        background-color: #78e08094;
+      background-color: #78e08094;
     }
   }
 `;

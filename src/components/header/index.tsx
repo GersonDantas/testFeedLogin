@@ -1,23 +1,22 @@
 import React, { useContext } from "react";
 import Nav from "./style";
 import Avatar from "@material-ui/core/Avatar";
-import Button from '@material-ui/core/Button'
+import Button from "@material-ui/core/Button";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import { Logout } from "@services/authentication";
 import { Context } from "@utils/Context/Contex";
-
 
 interface Props {
   name: string;
 }
 
 const Header: React.FC<Props> = ({ name }) => {
-  const { isLoading,  setIsloading } = useContext(Context);
+  const { isLoading, setIsloading } = useContext(Context);
 
   const logout = () => {
-    setIsloading(!isLoading)
-    return Logout()
-  }
+    setIsloading(!isLoading);
+    return Logout();
+  };
 
   return (
     <Nav>

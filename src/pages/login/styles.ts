@@ -28,7 +28,7 @@ const H1 = styled.h1`
 `;
 
 const Error = styled.div`
-  height: 50px;
+  height: 40px;
   .error {
     color: #ff1;
     background-color: #88292f;

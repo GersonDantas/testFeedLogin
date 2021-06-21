@@ -10,6 +10,12 @@ const Post = styled.div`
   padding: 15px;
   margin-bottom: 50px;
   .divAvatarMessage {
+    p {
+      font-size: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
     height: 25%;
     width: 100%;
     display: flex;
@@ -23,18 +29,37 @@ const Post = styled.div`
       width: 50px;
       height: 50px;
     }
-    em {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 20px;
-      line-height: 20px;
-      color: #ffffff;
+    div {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      div {
+        width: max-content;
+        span {
+          font-size: 20px;
+          color: #fff;
+          background-color: #698f3f;
+          border-radius: 10px;
+          height: 30px;
+          width: 100px;
+          text-align: center;
+        }
+      }
+      p {
+        display: flex;
+        justify-content: flex-end;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 20px;
+        color: #ffffff;
+      }
     }
   }
   .divMessage {
     background-color: #6e819a;
-    border-top: 0.9px  solid #525f71;
-    border-Bottom: 0.9px  solid #525f71;    
+    border-top: 0.9px solid #525f71;
+    border-bottom: 0.9px solid #525f71;
     height: 72%;
     overflow-y: scroll;
     word-break: break-word;

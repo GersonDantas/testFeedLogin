@@ -4,11 +4,18 @@ import { createContext, ReactNode, useState, useContext } from "react";
 type ContextData = {
   isLoading: boolean;
   setIsloading: Dispatch<SetStateAction<boolean>>;
-  iUserInput: {username: string; password: string };
+  iUserInput: {
+    username: string;
+    password: string;
+  };
   setIUserInput: Dispatch<
-    SetStateAction<{ username: string; password: string }>
+    SetStateAction<{
+      username: string;
+      password: string;
+    }>
   >;
-  saveUserUser: (username: string, password: string) => void;
+  postsState: object[];
+  setPosts: Dispatch<SetStateAction<object[]>>;
 };
 
 export const Context = createContext({} as ContextData);
@@ -20,13 +27,7 @@ type ContextProvider = {
 export function ContextProvider({ children }: ContextProvider) {
   const [isLoading, setIsloading] = useState(false);
   const [iUserInput, setIUserInput] = useState({ username: "", password: "" });
-
-  function saveUserUser(username: string, password: string) {
-    setIUserInput({
-      username,
-      password,
-    });
-  }
+  const [postsState, setPosts] = useState([{}]);
 
   return (
     <Context.Provider
@@ -35,7 +36,8 @@ export function ContextProvider({ children }: ContextProvider) {
         setIsloading,
         iUserInput,
         setIUserInput,
-        saveUserUser,
+        postsState,
+        setPosts,
       }}
     >
       {children}

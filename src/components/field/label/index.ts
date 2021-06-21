@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const label = styled.label`
-    display: flex;
-    flex-direction: column;
-` 
+  display: flex;
+  flex-direction: column;
+`;
 
-export default label
+export default label;

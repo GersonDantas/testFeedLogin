@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useContext, useEffect } from "react";
 import Post from "./style";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -9,7 +8,6 @@ import { MessagePost } from "@services/authorization";
 import { Context } from "@utils/Context/Contex";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Router } from "@material-ui/icons";
 
 interface Props {
   message: string;
@@ -22,11 +20,9 @@ const shema = yup.object().shape({
 const PostFeed: React.FC = () => {
   const { setIsloading } = useContext(Context);
 
-  const router = useRouter();
-
   useEffect(() => {
+      
     setIsloading(false)
-    setInterval(() => router.push('/feed'),5000) //update página
   }, []);
 
   const {

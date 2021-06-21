@@ -1,12 +1,10 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import Footer from "@components/footer";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Reset from "../styles/reset";
 import { ContextProvider } from "../utils/Context/Contex";
 import Header from "@components/header";
-
-
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -23,7 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ContextProvider>
         <Reset />
-        {Component.name !== "Auth" && <Header name="G" />}
+        {
+          Component.name !== "Auth" && (
+            <Header name="G" />
+          ) /*se for o Login, esconde o header*/
+        }
         <Component {...pageProps} />
         <Footer />
       </ContextProvider>
