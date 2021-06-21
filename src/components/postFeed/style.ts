@@ -59,8 +59,20 @@ const Post = styled.div`
       }
       .divButPost {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
         width: 500px;
+        p {
+          color: #ff1;
+          background-color: #88292f;
+          border-radius: 10px;
+          min-width: 250px;
+          min-height: 30px;
+          /* text-align: center; */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         .buttonPost {
           position: static;
           background-color: #20df7f;

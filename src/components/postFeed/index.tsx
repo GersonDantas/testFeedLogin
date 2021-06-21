@@ -1,28 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Post from "./style";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Form from "../form";
-import { SubmitHandler, useForm } from "react-hook-form";
+import Input from "@components/field/input";
+import { useForm } from "react-hook-form";
 import { MessagePost } from "../../services/authorization";
 import { Context } from "../../utils/Context/Contex";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 interface Props {
   message: string;
 }
 
-const PostFeed: React.FC = () => {
-  const { isLoading, loadingVisibleSuport, setIsloading } = useContext(Context);
+const shema = yup.object().shape({
+  message: yup.string().required("Cannot post without message").max(2000),
+});
 
-  const { register, handleSubmit, reset } = useForm<Props>();
-  const onSubmit: SubmitHandler<Props> = async (data) => {
+const PostFeed: React.FC = () => {
+  const { setIsloading } = useContext(Context);
+
+  useEffect(() => setIsloading(false), []);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+    clearErrors,
+  } = useForm<Props>({
+    resolver: yupResolver(shema),
+  });
+
+  const onSubmit = async (data: Props) => {
     try {
+      setIsloading(true);
       await MessagePost({ message: data.message });
+      setIsloading(false);
       reset();
-      setIsloading(!isLoading)
     } catch (error) {
-      setIsloading(!isLoading)
-      return alert(error);
+      return alert("server error");
     }
   };
 
@@ -37,21 +55,25 @@ const PostFeed: React.FC = () => {
           <textarea
             className="textArea"
             placeholder="text write from your post..."
-            {...register("message", {
-              required: true,
-            })}
+            {...register("message")}
           />
           <div className="divButPost">
-            <Button type="submit" className="buttonPost" onClick={loadingVisibleSuport} variant="contained">
+            <div>
+              {errors.message?.message && <p>{errors.message?.message}</p>}
+            </div>
+            <Button
+              type="submit"
+              className="buttonPost"
+              variant="contained"
+              onClick={() => setTimeout(() => clearErrors(), 2000)}
+            >
               Text Post
             </Button>
           </div>
         </Form>
       </div>
-
     </Post>
   );
-
 };
 
 export default PostFeed;
