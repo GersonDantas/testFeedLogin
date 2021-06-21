@@ -16,10 +16,10 @@ interface IFormInput {
 }
 
 const Auth: React.FC = () => {
+  const [error, setErro] = useState("");
+
   const { isLoading, setIsloading, setIUserInput } =
     useContext(Context);
-
-  const [error, setErro] = useState();
 
   const router = useRouter();
 
@@ -43,7 +43,7 @@ const Auth: React.FC = () => {
     } catch (error) {
       if (error.message.includes("401")) {
         setErro("username or password not found"); //resposta de error pra o usuário
-        setIsloading(!isLoading);
+        setIsloading(false);
       }
     }
   };
@@ -59,7 +59,6 @@ const Auth: React.FC = () => {
           {...register("username", {
             required: true,
           })}
-          value="test1"
         />
         <Input
           placeholder="password"
@@ -67,17 +66,15 @@ const Auth: React.FC = () => {
           {...register("password", {
             required: true,
           })}
-          value="49716685"
         />
         <Error>
-          <span className={error === "loading..." ? "loading" : "error"}>
-            {error}
-          </span>
+          {error && <span className="error">{error}</span>}
         </Error>
         <Button
           type="submit"
           className="button"
           variant="contained"
+          onClick={() => setTimeout(() => setErro(""), 2000)}
         >
           Login
         </Button>

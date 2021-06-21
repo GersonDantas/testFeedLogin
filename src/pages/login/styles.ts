@@ -29,14 +29,16 @@ const H1 = styled.h1`
 
 const Error = styled.div`
   height: 50px;
-  span.error {
-    height: 50px;
-    font-size: 20px;
-    color: red;
-  }
-  span.loading {
-    margin-bottom: 30px;
-    color: green;
+  .error {
+    color: #ff1;
+    background-color: #88292f;
+    border-radius: 10px;
+    min-width: 300px;
+    min-height: 30px;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
