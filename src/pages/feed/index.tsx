@@ -9,11 +9,9 @@ import { getToken, SeeFeed } from "@services/authorization";
 import IsLoading from "@components/isLoading";
 import { Context } from "@utils/Context/Contex";
 import api from "@services/api/api";
-import { storeMessage } from "@services/messageStorage";
 
 const Feed: React.FC = () => {
   const { isLoading, setIsloading, iUserInput } = useContext(Context);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -29,17 +27,14 @@ const Feed: React.FC = () => {
           "ens-auth-token": getToken()
         },
       })
-      .then((res) => res.data);
-      
-      storeMessage(data)
+      .then((res) => res.data)
+      .catch(e => alert("server error"))
 
       
     })()
   }, []);
 
   return (
-    <>
-      <Header name="G" />
       <Main>
         <PostFeed />
         {/* {text.map((text) => (
@@ -53,7 +48,6 @@ const Feed: React.FC = () => {
         ))} */}
         {isLoading && <IsLoading />}
       </Main>
-    </>
   );
 };
 

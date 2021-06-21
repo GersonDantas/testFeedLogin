@@ -10,12 +10,12 @@ export const getToken = () => {
 
 export const MessagePost = (message: Message) => {
   return api
-    .post("/feed", message, {
+    .post("/feed",{"message": message}, {
       headers: {
         "ens-auth-token": getToken(),
       },
     })
-    .then((res) => res.data);
+    .then((res) => console.log(res.data));
 };
 
 export const SeeFeed = () => {

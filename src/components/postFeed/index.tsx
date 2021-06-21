@@ -5,8 +5,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Form from "../form";
 import { useForm } from "react-hook-form";
-import { MessagePost } from "../../services/authorization";
-import { Context } from "../../utils/Context/Contex";
+import { MessagePost } from "@services/authorization";
+import { Context } from "@utils/Context/Contex";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Router } from "@material-ui/icons";
@@ -42,7 +42,7 @@ const PostFeed: React.FC = () => {
   const onSubmit = async (data: Props) => {
     try {
       setIsloading(true);
-      await MessagePost(JSON.stringify({"message": data.message}));
+      await MessagePost(data.message);
       setIsloading(false);
       reset();
     } catch (error) {

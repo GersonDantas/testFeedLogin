@@ -4,7 +4,7 @@ import { createContext, ReactNode, useState, useContext } from "react";
 type ContextData = {
   isLoading: boolean;
   setIsloading: Dispatch<SetStateAction<boolean>>;
-  iUserInput: {};
+  iUserInput: {username: string; password: string };
   setIUserInput: Dispatch<
     SetStateAction<{ username: string; password: string }>
   >;
