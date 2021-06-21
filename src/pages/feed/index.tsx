@@ -49,7 +49,7 @@ const Feed: React.FC = () => {
       const d = await Login(JSON.parse(getAuthorization()));
       await storeToken(d.authToken)
       console.log(d);
-    }, 5000); //vai realtenticar usuário após 59 minutos
+    }, 3540000); //vai realtenticar usuário após 59 minutos
 
     return () => clearInterval(clear2);
   }, []);
