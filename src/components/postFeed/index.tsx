@@ -36,7 +36,7 @@ const PostFeed: React.FC = () => {
   const onSubmit = async (data: Props) => {
     try {
       setIsloading(true);
-      await MessagePost({ message: data.message });
+      await MessagePost(JSON.stringify({message: data.message}));
       setIsloading(false);
       reset();
     } catch (error) {
