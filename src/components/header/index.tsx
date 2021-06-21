@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import Nav from "./stile";
+import Nav from "./style";
 import Avatar from "@material-ui/core/Avatar";
 import Button from '@material-ui/core/Button'
 import ExitToApp from "@material-ui/icons/ExitToApp";
-import { Logout } from "../../services/authentication";
-import { Context } from "../../utils/Context/Contex";
+import { Logout } from "@services/authentication";
+import { Context } from "@utils/Context/Contex";
 
 
 interface Props {

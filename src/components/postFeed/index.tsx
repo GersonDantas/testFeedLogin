@@ -4,7 +4,6 @@ import Post from "./style";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Form from "../form";
-import Input from "@components/field/input";
 import { useForm } from "react-hook-form";
 import { MessagePost } from "../../services/authorization";
 import { Context } from "../../utils/Context/Contex";
@@ -43,10 +42,11 @@ const PostFeed: React.FC = () => {
   const onSubmit = async (data: Props) => {
     try {
       setIsloading(true);
-      await MessagePost(JSON.stringify({message: data.message}));
+      await MessagePost(JSON.stringify({"message": data.message}));
       setIsloading(false);
       reset();
     } catch (error) {
+      setIsloading(false);
       return alert("server error");
     }
   };

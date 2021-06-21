@@ -18,7 +18,7 @@ interface IFormInput {
 const Auth: React.FC = () => {
   const [error, setErro] = useState("");
 
-  const { isLoading, setIsloading, setIUserInput } =
+  const { isLoading, setIsloading, setIUserInput, iUserInput} =
     useContext(Context);
 
   const router = useRouter();

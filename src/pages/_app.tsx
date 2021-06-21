@@ -1,3 +1,4 @@
+import Footer from "@components/footer";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Reset from "../styles/reset";
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ContextProvider>
         <Reset />
         <Component {...pageProps} />
+        <Footer />
       </ContextProvider>
     </>
   );

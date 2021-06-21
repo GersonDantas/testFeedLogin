@@ -8,11 +8,4 @@ const api = axios.create({
   },
 });
 
-// if (typeof window !== "undefined") {
-//   const authToken = window.localStorage.getItem("authToken");
-//   if (authToken) {
-//     api.defaults.headers.common["ens-auth-token"] = authToken
-//   }
-// }
-
 export default api;

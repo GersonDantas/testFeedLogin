@@ -8,17 +8,33 @@ import Message from "@components/message";
 import { getToken, SeeFeed } from "@services/authorization";
 import IsLoading from "@components/isLoading";
 import { Context } from "@utils/Context/Contex";
+import api from "@services/api/api";
+import { storeMessage } from "@services/messageStorage";
 
 const Feed: React.FC = () => {
-  const { isLoading, setIsloading } = useContext(Context);
+  const { isLoading, setIsloading, iUserInput } = useContext(Context);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !getToken()) {
-      router.push("/login"); //authorization
-    }
-    setIsloading(false);
+    (async () => {
+      if (typeof window !== "undefined" && !getToken()) {
+        await router.push("/login"); //authorization
+      }
+      setIsloading(false)
+
+      const data = await api
+      .get("/feed", {
+        headers: {
+          "ens-auth-token": getToken()
+        },
+      })
+      .then((res) => res.data);
+      
+      storeMessage(data)
+
+      
+    })()
   }, []);
 
   return (
@@ -26,11 +42,15 @@ const Feed: React.FC = () => {
       <Header name="G" />
       <Main>
         <PostFeed />
-        <Message
-          name="gerson"
-          message="sdfoshdofhos dhfdsihfod shfosdhhdsofhds oosdijfisj dfdsgd fgfdgdfg dfgfdg
-        dfoshdofhos dhfdsihfod shfosdhhdsofhds oosdijfisj dfdsgd fgfdgdfg dfgfdg"
-        />
+        {/* {text.map((text) => (
+          // eslint-disable-next-line react/jsx-key
+          <Message
+            count={text.count}
+            name={iUserInput.username}
+            message={text.message}
+            date={text.lastPostDate}
+          />
+        ))} */}
         {isLoading && <IsLoading />}
       </Main>
     </>

@@ -1,9 +1,15 @@
 import React from 'react';
+import  Foo from './style';
 
-// import { Container } from './styles';
 
-const footer: React.FC = () => {
-  return <div />;
+const Footer: React.FC = () => {
+  return (
+    <Foo>
+      <div>
+        <p>Copyright © 2020 Gerson. Open source</p>
+      </div>
+    </Foo>
+  )
 }
 
-export default footer;
+export default Footer;
