@@ -10,7 +10,7 @@ interface Props {
   name: string;
 }
 
-const Header: React.FC<Props> = ({ name }) => {
+const Header: React.FC = () => {
   const { isLoading, setIsloading } = useContext(Context);
 
   const logout = () => {
@@ -21,7 +21,7 @@ const Header: React.FC<Props> = ({ name }) => {
   return (
     <Nav>
       <div>
-        <Avatar className="avatarHeader">{name}</Avatar>
+        <Avatar className="avatarHeader"></Avatar>
       </div>
       <div>
         <Button onClick={logout} href="/login">

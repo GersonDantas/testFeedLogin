@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import Main from "@components/container";
 import Form from "@components/form";
@@ -6,7 +6,7 @@ import { Span, H1, Error } from "./styles";
 import Input from "@components/field/input";
 import Button from "@material-ui/core/Button";
 import { SubmitHandler, useForm} from "react-hook-form";
-import { Login, storeToken } from "@services/authentication";
+import { Login, Logout, storeToken } from "@services/authentication";
 import { Context } from "@utils/Context/Contex";
 import IsLoading from "@components/isLoading";
 import { setAutorization } from "@services/authorization";

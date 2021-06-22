@@ -6,11 +6,10 @@ import { Context } from "@utils/Context/Contex";
 interface Props {
   name: string;
   message: string;
-  count: number;
   date: string;
 }
 
-const Message: React.FC<Props> = ({ name, message, count, date }) => {
+const Message: React.FC<Props> = ({ name, message, date }) => {
   const { iUserInput } = useContext(Context);
 
   //formatando a data
@@ -40,7 +39,6 @@ const Message: React.FC<Props> = ({ name, message, count, date }) => {
   };
 
   return (
-    <div key={count}>
       <Post>
         <div className="divAvatarMessage">
           <Avatar className="avatarMessage">
@@ -55,7 +53,6 @@ const Message: React.FC<Props> = ({ name, message, count, date }) => {
           <p>{message}</p>
         </div>
       </Post>
-    </div>
   );
 };
 

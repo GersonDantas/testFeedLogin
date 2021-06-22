@@ -39,7 +39,6 @@ const Feed: React.FC = () => {
     const clear = setInterval(() => {
       let r = !recharge;
       setRecharge(r);
-      console.log(recharge);
     }, 5000); //update das mensagens
     return () => clearInterval(clear);
   }, []);
@@ -48,7 +47,6 @@ const Feed: React.FC = () => {
     const clear2 = setInterval(async () => {
       const d = await Login(JSON.parse(getAuthorization()));
       await storeToken(d.authToken)
-      console.log(d);
     }, 3540000); //vai realtenticar usuário após 59 minutos
 
     return () => clearInterval(clear2);
@@ -59,7 +57,7 @@ const Feed: React.FC = () => {
       <PostFeed />
       {postsState.map((text) => (
         <Message
-          count={text.count}
+          key={`${text.seq}${text.user}`}
           name={text.user}
           message={text.message}
           date={text.date}
